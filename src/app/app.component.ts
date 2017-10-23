@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { INCREMENT, DECREMENT, RESET, PRESET, ICounterState } from './counter';
+import {  ICounterState } from './counter';
 
 interface AppState {
-    counter: ICounterState;
+    counter: ICounterState[];
 }
 
 
@@ -14,17 +13,17 @@ interface AppState {
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    counters: ICounterState[];
     counter: number;
     counts: number[];
 
     constructor(private store: Store<AppState>) {
         store.select('counter').subscribe((state) => {
-            this.counter = state.counter;
-            this.counts = state.counts;
+            this.counters = state;
         });
     }
 
-    action(type) {
-        this.store.dispatch({type: type});
+    action(action) {
+        this.store.dispatch(action);
     }
 }

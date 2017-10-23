@@ -1,4 +1,7 @@
-<h1>{{ counter }}</h1>
+<h1>{{ counter.counter }}</h1>
+<h3>{{counter | json}}</h3>
 <button class="btn" (click)="changeCounter(increment)">Increment</button>
 <button class="btn" (click)="changeCounter(decrement)">Decrement</button>
 <button class="btn" (click)="changeCounter(reset)">Reset Counter</button>
+<button class="btn" (click)="changeCounter(add)">Add Counter</button>
+<button class="btn" (click)="changeCounter(remove)">Remove Counter</button>

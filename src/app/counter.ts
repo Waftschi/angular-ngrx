@@ -3,35 +3,62 @@
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
 export const RESET = 'RESET';
-export const PRESET = 'RESET ';
+export const ADD = 'ADD';
+export const REMOVE = 'REMOVE';
+
 
 export interface ICounterState {
+    counterId: number;
     counter: number;
     counts: number[];
 }
 
-
-export const initialState: ICounterState = {
+export const initialState: ICounterState[] = [{
+    counterId: 0,
     counter: 0,
     counts: []
-};
+}];
 
-export function counterReducer(state: any = initialState, action: { type, payload }): ICounterState {
-    let counter = 0;
+
+export function counterReducer(state: any = initialState, action: { type, payload }): ICounterState[] {
     switch (action.type) {
         case INCREMENT:
-            counter = state.counter + 1;
-            return {...state, ...{counter: counter, counts: [...state.counts, counter]}};
+            state.find(s => {
+                if (s.counterId === action.payload.counterId) {
+                    s.counter++;
+                    s.counts.push(s.counter);
+                }
+            });
+            return state;
 
         case DECREMENT:
-            counter = state.counter - 1;
-            return Object.assign({}, state, {counter: counter, counts: [...state.counts, counter]});
+            state.find(s => {
+                if (s.counterId === action.payload.counterId) {
+                    s.counter--;
+                    s.counts.push(s.counter);
+                }
+            });
+            return state;
+
+        case ADD:
+            const add = {
+                counterId: Math.floor(Math.random() * 1000),
+                counter: 0,
+                counts: []
+            };
+            return state.concat(add);
+
+        case REMOVE:
+            return state.filter(s => s.counterId !== action.payload.counterId);
 
         case RESET:
-            return Object.assign({}, state, {counter: 0, counts: []});
-
-        case PRESET:
-            return Object.assign({}, state, {counter: 6, counts: [6]});
+            state.find(s => {
+                if (s.counterId === action.payload.counterId) {
+                    s.counter = 0;
+                    s.counts.push(s.counter);
+                }
+            });
+            return state;
 
         default:
             return state;
