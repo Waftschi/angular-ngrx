@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
+    <div><button class="btn" (click)="orderBy()">Sort</button></div>
     <div>
-        <app-counter *ngFor="let counter of counters" (counterUpdated)="action($event)" [counter]="counter"></app-counter>
+        <app-counter *ngFor="let counter of counters | orderBy:order:ascending " (counterUpdated)="action($event)" [counter]="counter"></app-counter>
     </div>
 </div>
 

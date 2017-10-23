@@ -6,18 +6,20 @@ import { counterReducer } from './counter';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CounterComponent } from './counter/counter.component';
+import { OrderByPipe } from './order-by.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CounterComponent
+    CounterComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
       StoreModule.forRoot({ counter: counterReducer }),
       StoreDevtoolsModule.instrument()
   ],
-  providers: [],
+  providers: [OrderByPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
