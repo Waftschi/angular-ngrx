@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { INCREMENT, DECREMENT, RESET, ADD, REMOVE } from './../counter';
 
 import { CounterComponent } from './counter.component';
 
@@ -16,6 +17,8 @@ describe('CounterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CounterComponent);
     component = fixture.componentInstance;
+    // Fixes @Input failure
+    component.counter = '...';
     fixture.detectChanges();
   });
 
