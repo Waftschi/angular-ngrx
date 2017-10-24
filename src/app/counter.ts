@@ -19,7 +19,6 @@ export const initialState: ICounterState[] = [{
     counts: []
 }];
 
-
 export function counterReducer(state: any = initialState, action: { type, payload }): ICounterState[] {
     switch (action.type) {
         case INCREMENT:
