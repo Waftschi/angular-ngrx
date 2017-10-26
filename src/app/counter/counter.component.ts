@@ -20,6 +20,7 @@ export class CounterComponent implements OnInit {
     constructor() {}
 
     changeCounter(type) {
+        console.dir(this.counter);
         this.counterUpdated.emit({type: type, payload: this.counter});
     }
 

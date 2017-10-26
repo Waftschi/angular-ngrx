@@ -20,41 +20,44 @@ export const initialState: ICounterState[] = [{
 }];
 
 export function counterReducer(state: any = initialState, action: { type, payload }): ICounterState[] {
+    console.dir(state);
+
     switch (action.type) {
         case INCREMENT:
-            state.find(s => {
-                if (s.counterId === action.payload.counterId) {
-                    s.counter++;
-                    s.counts.push(s.counter);
+            state.find(counter => {
+                if (counter.counterId === action.payload.counterId) {
+                    counter.counter++;
+                    counter.counts.push(counter.counter);
                 }
             });
             return state;
 
         case DECREMENT:
-            state.find(s => {
-                if (s.counterId === action.payload.counterId) {
-                    s.counter--;
-                    s.counts.push(s.counter);
+            return state.map(counter => {
+                if (counter.counterId === action.payload.counterId) {
+                    Object.assign({}, counter, {
+                        counter: (counter.counter--),
+                        counts: (counter.counts.push(counter.counter))
+                    });
                 }
+                return counter;
             });
-            return state;
-
         case ADD:
             const add = {
-                counterId: Math.floor(Math.random() * 1000),
+                counterId: state.length + 1,
                 counter: 0,
                 counts: []
             };
-            return state.concat(add);
+            return state.concat([add]);
 
         case REMOVE:
             return state.filter(s => s.counterId !== action.payload.counterId);
 
         case RESET:
-            state.find(s => {
-                if (s.counterId === action.payload.counterId) {
-                    s.counter = 0;
-                    s.counts.push(s.counter);
+            state.find(counter => {
+                if (counter.counterId === action.payload.counterId) {
+                    counter.counter = 0;
+                    counter.counts.push(counter.counter);
                 }
             });
             return state;
