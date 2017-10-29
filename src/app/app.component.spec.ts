@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { CounterComponent } from './counter/counter.component';
 import { OrderByPipe } from './order-by.pipe';
 import { Store, StoreModule } from '@ngrx/store';
-import { counterReducer } from './counter';
+import { counterReducer } from './state/counter';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {

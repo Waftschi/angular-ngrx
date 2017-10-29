@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ICounterState } from './counter';
+import { ICounterState } from './state/counter';
 import { Observable } from 'rxjs/Observable';
 import { OrderByPipe } from './order-by.pipe';
 
@@ -24,11 +24,11 @@ export class AppComponent {
     ascending = true;
 
     constructor(private store: Store<AppState>, private orderByPipe: OrderByPipe) {
-        store.select('counter').subscribe((state) => {
-            this.counters = state;
-        });
+        // store.select('counter').subscribe((state) => {
+        //     this.counters = state;
+        // });
 
-        // this.counters$ = store.select('counter');
+        this.counters$ = store.select('counter');
     }
 
     action(action) {

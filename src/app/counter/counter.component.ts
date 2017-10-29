@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { INCREMENT, DECREMENT, RESET, ADD, REMOVE } from './../counter';
+import { INCREMENT, DECREMENT, RESET, ADD, REMOVE, EFFECT_TEST } from '../state/counter';
 
 @Component({
     selector: 'app-counter',
@@ -13,6 +13,7 @@ export class CounterComponent implements OnInit {
     reset: string = RESET;
     add: string = ADD;
     remove: string = REMOVE;
+    effectTest: string = EFFECT_TEST;
 
 
     @Input() counter;
@@ -20,7 +21,6 @@ export class CounterComponent implements OnInit {
     constructor() {}
 
     changeCounter(type) {
-        console.dir(this.counter);
         this.counterUpdated.emit({type: type, payload: this.counter});
     }
 
